@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Termux Bot Kontrol</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        h1 { 
+            font-size: 2.5em; 
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        p { 
+            font-size: 1.2em; 
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+        .btn:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-5px);
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .feature {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Termux Bot Kontrol</h1>
+        <p>Telegram üzerinden Termux'unuzu uzaktan yönetin</p>
+        
+        <div style="margin: 30px 0;">
+            <a href="https://t.me/MyTermuxUmitBot" class="btn">📱 Botu Kullan</a>
+            <a href="https://t.me/umitizmm" class="btn">📢 Kanalımız</a>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <h3>🔧 Sistem Kontrolü</h3>
+                <p>Tüm Termux komutları</p>
+            </div>
+            <div class="feature">
+                <h3>📁 Dosya Yönetimi</h3>
+                <p>Uzaktan dosya işlemleri</p>
+            </div>
+            <div class="feature">
+                <h3>🌐 Ağ Araçları</h3>
+                <p>Port tarama ve analiz</p>
+            </div>
+            <div class="feature">
+                <h3>🔒 Güvenlik</h3>
+                <p>Yetkili erişim kontolü</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; opacity: 0.8;">
+            <p><strong>Bot:</strong> @MyTermuxUmitBot</p>
+            <p><strong>Site:</strong>Im-umit.github.io</p>
+        </div>
+    </div>
+</body>
+</html>
