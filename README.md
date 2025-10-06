@@ -26,13 +26,16 @@ markdown
 
 ## 🚀 Hızlı Kurulum
 
-bash
+
 # Termux'ta:
+```bash
 pkg update && pkg upgrade
 pkg install python -y
 pip install python-telegram-bot requests
-
+```
 # Botu indir ve çalıştır:
+```bash
 git clone https://github.com/kullaniciadi/termux-bot
 cd termux-bot
 python bot.py
+```
