@@ -1,32 +1,29 @@
-#!/data/data/com.termux/files/usr/bin/python3
+[01:02, 07.10.2025] Ümit: 5950361306
+[01:21, 07.10.2025] Ümit: #!/data/data/com.termux/files/usr/bin/python3
 import subprocess
-import os
 import sys
+import asyncio
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
 print("TERMUX TELEGRAM BOT KURULUMU")
 print("=" * 40)
 
-# Kullanıcıdan bilgileri al
 def setup_bot():
     print("\nLutfen asagidaki bilgileri girin:")
     
-    # Bot Token
     token = input("Bot Token'inizi girin: ").strip()
     if not token:
         print("HATA: Bot Token gerekli!")
         sys.exit(1)
     
-    # Telegram ID
     user_id = input("Telegram ID'nizi girin: ").strip()
     if not user_id.isdigit():
         print("HATA: Gecerli bir Telegram ID girin!")
         sys.exit(1)
     
-    return token, int(user_id)
+    return token, [int(user_id)]  # LISTE olarak döndür
 
-# Bilgileri al
 TOKEN, AUTHORIZED_USERS = setup_bot()
 
 print(f"\nBot ayarlari tamamlandi!")
@@ -36,7 +33,7 @@ print("Bot baslatiliyor...\n")
 def auth_required(func):
     async def wrapper(update: Update, context: ContextTypes.DEFAULT_TYPE):
         user_id = update.effective_user.id
-        if user_id not in AUTHORIZED_USERS:
+        if user_id not in AUTHORIZED_USERS:  # Şimdi liste olduğu için çalışacak
             await update.message.reply_text("Bu botu kullanma yetkiniz yok!")
             return
         return await func(update, context)
@@ -48,7 +45,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         f"Merhaba {user.first_name}!\n\n"
         "Termux Bot aktif!\n\n"
-        "Kullanilabilir Komutlar:\n"
+        "Komutlar:\n"
         "/start - Botu baslat\n"
         "/sysinfo - Sistem bilgisi\n"
         "/files - Dosya listesi\n"
@@ -56,7 +53,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/python <kod> - Python kodu calistir\n"
         "/install <paket> - Paket kur\n"
         "/update - Sistemi guncelle\n\n"
-        "Not: Direkt komut da yazabilirsiniz (ls, pwd, neofetch vb.)"
+        "Direkt komut da yazabilirsiniz (ls, pwd, neofetch vb.)"
     )
 
 @auth_required
@@ -161,8 +158,11 @@ async def update_system(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await start(update, context)
 
-def main():
+async def main():
     try:
+        # Önce diğer bot örneklerini durdur
+        subprocess.run("pkill -f 'python.*termux-bot'", shell=True)
+        
         app = Application.builder().token(TOKEN).build()
         
         commands = [
@@ -185,14 +185,10 @@ def main():
         print("Telegram'dan botunuza /start yazin")
         print("Durdurmak icin: CTRL + C\n")
         
-        app.run_polling()
+        await app.run_polling()
         
     except Exception as e:
         print(f"Bot baslatilamadi: {e}")
-        print("Hata cozumu:")
-        print("   - Bot token'ini kontrol edin")
-        print("   - Internet baglantinizi kontrol edin")
-        print("   - python-telegram-bot kutuphanesi kurulu mu?")
 
 if _name_ == "_main_":
-    main()
+    asyncio.run(main())
